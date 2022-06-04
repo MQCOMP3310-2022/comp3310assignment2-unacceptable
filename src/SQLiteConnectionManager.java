@@ -173,7 +173,7 @@ public class SQLiteConnectionManager {
                     {
                         int result = resultRows.getInt("total");
                         System.out.println("Total found:" + result);
-                        return >= 1;
+                        return result >= 1;
                     }
                     resultRows.close(); //Fixed to close ResultSet after use
                 }
