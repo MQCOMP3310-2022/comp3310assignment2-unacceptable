@@ -69,15 +69,12 @@ public class Grid implements Iterable<Cell>{
                 func.accept(cells[i][j]);
             }
         }
-<<<<<<< HEAD
         /*for (int i: cells) {
             for (int j: cells) {
                 func.accept(cells[i][j]);
             }
         }*/
          //Fixed to for each loop
-=======
->>>>>>> 73417d9648b398ff23e623f46d72dfe10d3e532e
     }
 
 	@Override
