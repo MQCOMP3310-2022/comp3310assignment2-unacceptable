@@ -27,3 +27,5 @@ replay_pid*
 
 #Mac index files
 .DS_Store 
+
+sqlite/word.db
