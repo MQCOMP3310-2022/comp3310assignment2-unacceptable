@@ -82,6 +82,7 @@ public class Board {
             
             secretWordIndex = ( secretWordIndex + 1 ) % numberOfWords;
             String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex);
+            //Print out streak
             System.out.println("Your streak is: " + grid.streak);
             grid.setWord(theWord);
 
