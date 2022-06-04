@@ -69,12 +69,15 @@ public class Grid implements Iterable<Cell>{
                 func.accept(cells[i][j]);
             }
         }
+<<<<<<< HEAD
+=======
         /*for (int i: cells) {
             for (int j: cells) {
                 func.accept(cells[i][j]);
             }
         }*/
          //Fixed to for each loop
+>>>>>>> main
     }
 
 	@Override
@@ -155,7 +158,8 @@ public class Grid implements Iterable<Cell>{
     protected boolean checkActiveRowAgainstWord(){
         String word ="";
         for(int i = 0; i < cells[activeRow].length; i++){
-            word = word + cells[activeRow][i].getStoredCharacter();
+            word = word + cells[activeRow][i].getStoredCharacter().toLowerCase();
+            //Now converts capital letters to lowercases
         }
         return word.equals(wordToGuess);
     }

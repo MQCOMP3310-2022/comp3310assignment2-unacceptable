@@ -3,13 +3,15 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.Random;
 
 public class Board {
     Grid grid;
     SQLiteConnectionManager wordleDatabaseConnection;
     int secretWordIndex;
     int numberOfWords;
+    int[] index = new int[100];
+    Random rand = new Random(); //Random
 
     public Board(){
         wordleDatabaseConnection = new SQLiteConnectionManager("words.db");
@@ -53,8 +55,8 @@ public class Board {
 
 
         grid = new Grid(6,4, wordleDatabaseConnection);
-        secretWordIndex = 2;
-        String theWord = wordleDatabaseConnection.getWordAtIndex(2);
+        secretWordIndex = rand.nextInt(numberOfWords - 1); //Select word randomly
+        String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex+1);
         grid.setWord(theWord);
     }
 
@@ -80,7 +82,8 @@ public class Board {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
             grid.keyPressedEscape();
             
-            secretWordIndex = ( secretWordIndex + 1 ) % numberOfWords;
+            usedIndex(secretWordIndex); //Store the index value
+            secretWordIndex = getIndex(); //Generate a new index randomly
             String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex);
             //Print out streak
             System.out.println("Your streak is: " + grid.streak);
@@ -93,5 +96,28 @@ public class Board {
             System.out.println("Character Key");
         }
 
+    }
+
+    //Random generator
+
+    static int REPEAT = 100;
+    int iterator = 0;
+    int[] usedIndex = new int[REPEAT];
+
+    private void usedIndex(int i) {
+        usedIndex[iterator % REPEAT] = i;
+        System.out.println(usedIndex[iterator % REPEAT] + " will not appear in next 100 attempts!");
+        iterator++;
+    }
+
+    private int getIndex() {
+        int nextInd = rand.nextInt(numberOfWords);
+        for (int i : usedIndex) {
+            if (i != 0 && nextInd == i) {
+                nextInd = getIndex();
+                break;
+            }
+        }
+        return nextInd;
     }
 }
