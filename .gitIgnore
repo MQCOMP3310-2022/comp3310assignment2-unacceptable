@@ -26,4 +26,6 @@ hs_err_pid*
 replay_pid*
 
 #Mac index files
-.DS_Store 
+.DS_Store
+
+/sqlite/words.db
