@@ -85,8 +85,8 @@ public class Grid implements Iterable<Cell>{
         if(!gameFinished){
             
             //is the row full? If so, let's compare!
-            if( activeColumn == cells[activeRow].length -1 &&
-            !" ".equals(cells[activeRow][activeColumn].getStoredCharacter())){  //Fixed to have correct literal position
+            if( activeColumn == cells[activeRow].length -1 && 
+                !cells[activeRow][activeColumn].getStoredCharacter().equals(" ")){
                 
                 if(checkActiveRowAgainstWord()){
                     //success!

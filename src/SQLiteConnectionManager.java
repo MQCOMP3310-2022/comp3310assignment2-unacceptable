@@ -143,7 +143,6 @@ public class SQLiteConnectionManager {
                 System.out.println("successful next curser sqlite");
                 result = cursor.getString(1);
             }
-            cursor.close(); //Fixed to close ResultSet after use
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -168,14 +167,21 @@ public class SQLiteConnectionManager {
                 ) 
             {
                 if (conn != null) {
-                    ResultSet resultRows = stmt.executeQuery();
+                    ResultSet resultRows  = stmt.executeQuery();
                     while (resultRows.next())
                     {
                         int result = resultRows.getInt("total");
                         System.out.println("Total found:" + result);
-                        return result >= 1;
+                        if(result >= 1)
+                        {
+                            return true;
+                        } 
+                        else
+                        {
+                            return false;
+                        }
                     }
-                    resultRows.close(); //Fixed to close ResultSet after use
+                     
                 }
                 return false;
 

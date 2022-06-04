@@ -69,7 +69,6 @@ public class Cell extends Rectangle{
                 backbgroundColor = Color.DARK_GRAY;
                 textColor = Color.WHITE;
                 isEmpty = true;
-                break; // Fixed to have break keyword here
         }
     }
 
