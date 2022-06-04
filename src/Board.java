@@ -97,6 +97,8 @@ public class Board {
 
     }
 
+    //Random generator
+
     static int REPEAT = 100;
     int iterator = 0;
     int[] usedIndex = new int[REPEAT];
@@ -110,7 +112,6 @@ public class Board {
     private int getIndex() {
         int nextInd = rand.nextInt(numberOfWords);
         for (int i : usedIndex) {
-            System.out.println(i);
             if (i != 0 && nextInd == i) {
                 nextInd = getIndex();
                 break;
