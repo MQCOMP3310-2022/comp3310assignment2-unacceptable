@@ -3,13 +3,14 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.Random;
 
 public class Board {
     Grid grid;
     SQLiteConnectionManager wordleDatabaseConnection;
     int secretWordIndex;
     int numberOfWords;
+    Random rand = new Random(); //Random
 
     public Board(){
         wordleDatabaseConnection = new SQLiteConnectionManager("words.db");
@@ -53,8 +54,8 @@ public class Board {
 
 
         grid = new Grid(6,4, wordleDatabaseConnection);
-        secretWordIndex = 2;
-        String theWord = wordleDatabaseConnection.getWordAtIndex(2);
+        secretWordIndex = rand.nextInt(numberOfWords - 1); //Select word randomly
+        String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex+1);
         grid.setWord(theWord);
     }
 
@@ -80,7 +81,7 @@ public class Board {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
             grid.keyPressedEscape();
             
-            secretWordIndex = ( secretWordIndex + 1 ) % numberOfWords;
+            secretWordIndex = rand.nextInt(numberOfWords - 1) + 1;
             String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex);
             System.out.println("Your streak is: " + grid.streak);
             grid.setWord(theWord);
