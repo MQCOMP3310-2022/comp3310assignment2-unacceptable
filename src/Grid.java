@@ -69,6 +69,15 @@ public class Grid implements Iterable<Cell>{
                 func.accept(cells[i][j]);
             }
         }
+<<<<<<< HEAD
+=======
+        /*for (int i: cells) {
+            for (int j: cells) {
+                func.accept(cells[i][j]);
+            }
+        }*/
+         //Fixed to for each loop
+>>>>>>> main
     }
 
 	@Override
@@ -115,6 +124,7 @@ public class Grid implements Iterable<Cell>{
                             cells[activeRow][i].setInactive();
                             cells[activeRow][i].setState(4);
                         }
+                        streak = 0;
                         gameFinished = true;
                     }else{
                         //do stuff to highlihgt correct characters
