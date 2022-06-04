@@ -63,7 +63,7 @@ public class Grid implements Iterable<Cell>{
             for (int j: cells) {
                 func.accept(cells[i][j]);
             }
-        }
+        } //Fixed to for each loop
     }
 
 	@Override
@@ -91,7 +91,7 @@ public class Grid implements Iterable<Cell>{
             
             //is the row full? If so, let's compare!
             if( activeColumn == cells[activeRow].length -1 &&
-            !" ".equals(cells[activeRow][activeColumn].getStoredCharacter())){
+            !" ".equals(cells[activeRow][activeColumn].getStoredCharacter())){  //Fixed to have correct literal position
                 
                 if(checkActiveRowAgainstWord()){
                     //success!
