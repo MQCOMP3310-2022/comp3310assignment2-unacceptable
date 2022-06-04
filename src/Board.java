@@ -10,6 +10,7 @@ public class Board {
     SQLiteConnectionManager wordleDatabaseConnection;
     int secretWordIndex;
     int numberOfWords;
+    int[] index = new int[100];
     Random rand = new Random(); //Random
 
     public Board(){
@@ -81,7 +82,8 @@ public class Board {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
             grid.keyPressedEscape();
             
-            secretWordIndex = rand.nextInt(numberOfWords - 1) + 1;
+            usedIndex(secretWordIndex); //Store the index value
+            secretWordIndex = getIndex(); //Generate a new index randomly
             String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex);
             System.out.println("Your streak is: " + grid.streak);
             grid.setWord(theWord);
@@ -93,5 +95,27 @@ public class Board {
             System.out.println("Character Key");
         }
 
+    }
+
+    static int REPEAT = 100;
+    int iterator = 0;
+    int[] usedIndex = new int[REPEAT];
+
+    private void usedIndex(int i) {
+        usedIndex[iterator % REPEAT] = i;
+        System.out.println(usedIndex[iterator % REPEAT] + " will not appear in next 100 attempts!");
+        iterator++;
+    }
+
+    private int getIndex() {
+        int nextInd = rand.nextInt(numberOfWords);
+        for (int i : usedIndex) {
+            System.out.println(i);
+            if (i != 0 && nextInd == i) {
+                nextInd = getIndex();
+                break;
+            }
+        }
+        return nextInd;
     }
 }
