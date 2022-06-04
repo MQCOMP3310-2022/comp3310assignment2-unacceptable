@@ -142,9 +142,8 @@ public class SQLiteConnectionManager {
             if(cursor.next()){
                 System.out.println("successful next curser sqlite");
                 result = cursor.getString(1);
-                //cursor.close();
             }
-            cursor.close();
+            cursor.close(); //Fixed to close ResultSet after use
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -176,7 +175,7 @@ public class SQLiteConnectionManager {
                         System.out.println("Total found:" + result);
                         return >= 1;
                     }
-                    resultRows.close();
+                    resultRows.close(); //Fixed to close ResultSet after use
                 }
                 return false;
 

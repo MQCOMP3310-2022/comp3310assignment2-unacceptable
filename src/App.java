@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public final class App extends JFrame {
+public final class App extends JFrame { //Fixed
 
     class WordleGame extends JPanel implements KeyListener{
         Board board;
