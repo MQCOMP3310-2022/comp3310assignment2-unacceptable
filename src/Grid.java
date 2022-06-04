@@ -54,8 +54,13 @@ public class Grid implements Iterable<Cell>{
      * @param func The `Cell` to `void` function to apply at each spot.
      */
     public void doToEachCell(Consumer<Cell> func) {
-        for (int i = 0; i < cells.length; i++) {
+        /*for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
+                func.accept(cells[i][j]);
+            }
+        }*/
+        for (int i: cells) {
+            for (int j: cells) {
                 func.accept(cells[i][j]);
             }
         }
@@ -85,8 +90,8 @@ public class Grid implements Iterable<Cell>{
         if(!gameFinished){
             
             //is the row full? If so, let's compare!
-            if( activeColumn == cells[activeRow].length -1 && 
-                !cells[activeRow][activeColumn].getStoredCharacter().equals(" ")){
+            if( activeColumn == cells[activeRow].length -1 &&
+            !" ".equals(cells[activeRow][activeColumn].getStoredCharacter())){
                 
                 if(checkActiveRowAgainstWord()){
                     //success!
