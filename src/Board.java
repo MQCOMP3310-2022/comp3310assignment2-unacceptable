@@ -3,10 +3,6 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-// import java.util.Scanner;
-// import java.sql.Connection;
-// import java.sql.DriverManager;
-// import java.sql.SQLException;
 
 
 public class Board {
@@ -86,6 +82,7 @@ public class Board {
             
             secretWordIndex = ( secretWordIndex + 1 ) % numberOfWords;
             String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex);
+            System.out.println("Your streak is: " + grid.streak);
             grid.setWord(theWord);
 
             System.out.println("Escape Key");

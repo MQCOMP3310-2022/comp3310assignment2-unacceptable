@@ -11,6 +11,9 @@ public class Grid implements Iterable<Cell>{
     String wordToGuess;
     boolean gameFinished;
     SQLiteConnectionManager wordleDatabaseConnection;
+
+    //Streak implementation
+    int streak;
     
     public Grid(int rows, int wordLength, SQLiteConnectionManager sqlConn){
         cells = new Cell[rows][wordLength];
@@ -27,6 +30,8 @@ public class Grid implements Iterable<Cell>{
         wordToGuess = "";
         gameFinished = false;
         wordleDatabaseConnection = sqlConn;
+        //
+        streak = 0;
     }
 
     void setWord(String word){
@@ -38,6 +43,11 @@ public class Grid implements Iterable<Cell>{
     }
 
     public void reset(){
+        //
+        if(!gameFinished){
+            streak = 0;
+        }
+        //
         cells[activeRow][activeColumn].setInactive();
         activeRow = 0;
         activeColumn = 0;
@@ -100,6 +110,9 @@ public class Grid implements Iterable<Cell>{
                         cells[activeRow][i].setState(3);
                     }
                     gameFinished = true;
+                    //
+                    streak++;
+                    //
                 }else{
                     if(activeRow >= cells.length-1){
                         // run out of guesses to use
