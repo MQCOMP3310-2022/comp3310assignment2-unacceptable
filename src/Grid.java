@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.util.BitSet;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.function.Consumer;
 
 
@@ -149,7 +150,7 @@ public class Grid implements Iterable<Cell>{
     protected boolean checkActiveRowAgainstWord(){
         String word ="";
         for(int i = 0; i < cells[activeRow].length; i++){
-            word = word + cells[activeRow][i].getStoredCharacter().toLowerCase();
+            word = word + cells[activeRow][i].getStoredCharacter().toLowerCase(Locale.US);
             //Now converts capital letters to lowercases
         }
         return word.equals(wordToGuess);
