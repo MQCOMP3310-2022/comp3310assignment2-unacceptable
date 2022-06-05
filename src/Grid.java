@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.util.BitSet;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.function.Consumer;
 
 
@@ -30,8 +31,8 @@ public class Grid implements Iterable<Cell>{
         wordToGuess = "";
         gameFinished = false;
         wordleDatabaseConnection = sqlConn;
-        //
-        streak = 0;
+        
+        streak = 0; //streak implementation
     }
 
     void setWord(String word){
@@ -43,11 +44,11 @@ public class Grid implements Iterable<Cell>{
     }
 
     public void reset(){
-        //
+        //if game has reset before it has finished then reset streak
         if(!gameFinished){
             streak = 0;
         }
-        //
+        
         cells[activeRow][activeColumn].setInactive();
         activeRow = 0;
         activeColumn = 0;
@@ -64,20 +65,11 @@ public class Grid implements Iterable<Cell>{
      * @param func The `Cell` to `void` function to apply at each spot.
      */
     public void doToEachCell(Consumer<Cell> func) {
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                func.accept(cells[i][j]);
+        for (Cell[] i:cells) {
+            for (Cell j:i) {
+                func.accept(j);
             }
-        }
-<<<<<<< HEAD
-=======
-        /*for (int i: cells) {
-            for (int j: cells) {
-                func.accept(cells[i][j]);
-            }
-        }*/
-         //Fixed to for each loop
->>>>>>> main
+        } //Fixed to use for each loop instead
     }
 
 	@Override
@@ -113,10 +105,8 @@ public class Grid implements Iterable<Cell>{
                         cells[activeRow][i].setInactive();
                         cells[activeRow][i].setState(3);
                     }
-                    gameFinished = true;
-                    //
-                    streak++;
-                    //
+                    streak++; //increase streak
+                    gameFinished = true;                 
                 }else{
                     if(activeRow >= cells.length-1){
                         // run out of guesses to use
@@ -124,7 +114,7 @@ public class Grid implements Iterable<Cell>{
                             cells[activeRow][i].setInactive();
                             cells[activeRow][i].setState(4);
                         }
-                        streak = 0;
+                        streak = 0; //reset streak
                         gameFinished = true;
                     }else{
                         //do stuff to highlihgt correct characters
@@ -158,7 +148,7 @@ public class Grid implements Iterable<Cell>{
     protected boolean checkActiveRowAgainstWord(){
         String word ="";
         for(int i = 0; i < cells[activeRow].length; i++){
-            word = word + cells[activeRow][i].getStoredCharacter().toLowerCase();
+            word = word + cells[activeRow][i].getStoredCharacter().toLowerCase(Locale.US);
             //Now converts capital letters to lowercases
         }
         return word.equals(wordToGuess);

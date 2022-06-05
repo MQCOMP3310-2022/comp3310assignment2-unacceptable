@@ -10,7 +10,6 @@ public class Board {
     SQLiteConnectionManager wordleDatabaseConnection;
     int secretWordIndex;
     int numberOfWords;
-    int[] index = new int[100];
     Random rand = new Random(); //Random
 
     public Board(){
@@ -85,8 +84,8 @@ public class Board {
             usedIndex(secretWordIndex); //Store the index value
             secretWordIndex = getIndex(); //Generate a new index randomly
             String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex);
-            //Print out streak
-            System.out.println("Your streak is: " + grid.streak);
+            
+            System.out.println("Your streak is: " + grid.streak); //Print out streak
             grid.setWord(theWord);
 
             System.out.println("Escape Key");
