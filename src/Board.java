@@ -84,8 +84,8 @@ public class Board {
             usedIndex(secretWordIndex); //Store the index value
             secretWordIndex = getIndex(); //Generate a new index randomly
             String theWord = wordleDatabaseConnection.getWordAtIndex(secretWordIndex);
-            //Print out streak
-            System.out.println("Your streak is: " + grid.streak);
+            
+            System.out.println("Your streak is: " + grid.streak); //Print out streak
             grid.setWord(theWord);
 
             System.out.println("Escape Key");

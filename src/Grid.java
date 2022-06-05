@@ -31,8 +31,8 @@ public class Grid implements Iterable<Cell>{
         wordToGuess = "";
         gameFinished = false;
         wordleDatabaseConnection = sqlConn;
-        //
-        streak = 0;
+        
+        streak = 0; //streak implementation
     }
 
     void setWord(String word){
@@ -44,11 +44,11 @@ public class Grid implements Iterable<Cell>{
     }
 
     public void reset(){
-        //
+        //if game has reset before it has finished then reset streak
         if(!gameFinished){
             streak = 0;
         }
-        //
+        
         cells[activeRow][activeColumn].setInactive();
         activeRow = 0;
         activeColumn = 0;
@@ -105,10 +105,8 @@ public class Grid implements Iterable<Cell>{
                         cells[activeRow][i].setInactive();
                         cells[activeRow][i].setState(3);
                     }
-                    gameFinished = true;
-                    //
-                    streak++;
-                    //
+                    streak++; //increase streak
+                    gameFinished = true;                 
                 }else{
                     if(activeRow >= cells.length-1){
                         // run out of guesses to use
@@ -116,7 +114,7 @@ public class Grid implements Iterable<Cell>{
                             cells[activeRow][i].setInactive();
                             cells[activeRow][i].setState(4);
                         }
-                        streak = 0;
+                        streak = 0; //reset streak
                         gameFinished = true;
                     }else{
                         //do stuff to highlihgt correct characters
