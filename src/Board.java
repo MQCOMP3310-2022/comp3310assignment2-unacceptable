@@ -10,7 +10,6 @@ public class Board {
     SQLiteConnectionManager wordleDatabaseConnection;
     int secretWordIndex;
     int numberOfWords;
-    int[] index = new int[100];
     Random rand = new Random(); //Random
 
     public Board(){

@@ -64,11 +64,11 @@ public class Grid implements Iterable<Cell>{
      * @param func The `Cell` to `void` function to apply at each spot.
      */
     public void doToEachCell(Consumer<Cell> func) {
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                func.accept(cells[i][j]);
+        for (Cell[] i:cells) {
+            for (Cell j:i) {
+                func.accept(j);
             }
-        }
+        } //Fixed to use for each loop instead
     }
 
 	@Override
