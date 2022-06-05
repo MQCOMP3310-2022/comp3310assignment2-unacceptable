@@ -29,3 +29,5 @@ replay_pid*
 .DS_Store
 
 sqlite/words.db
+
+logs.log.0
