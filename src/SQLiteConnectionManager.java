@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
 
 public class SQLiteConnectionManager {
 
@@ -133,7 +134,7 @@ public class SQLiteConnectionManager {
      * @return
      */
     public String getWordAtIndex(int index){
-        String sql = "SELECT word FROM validWords where id="+index+";";
+        String sql = "SELECT word FROM validWords where id="+index;
         String result = "";
         try (Connection conn = DriverManager.getConnection(databaseURL);
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -148,8 +149,9 @@ public class SQLiteConnectionManager {
             System.out.println(e.getMessage());
         }
         System.out.println("getWordAtIndex===========================");
-        System.out.println("sql: " + sql);
-        System.out.println("result: " + result);
+        //System.out.println("sql: " + sql);
+        //System.out.println("result: " + result);
+        App.logging(Level.INFO, "sql: " + sql + ", result: " + result); // Log the selected word
 
         return result;
     }

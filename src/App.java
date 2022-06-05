@@ -1,8 +1,13 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -70,6 +75,19 @@ public final class App extends JFrame { //Fixed
             }
         }
     }
+    static {
+        // must set before the Logger
+        // loads logging.properties from the classpath
+        try (FileInputStream logFile =new FileInputStream("resources/logging.properties")){// resources\logging.properties
+            LogManager.getLogManager().readConfiguration(logFile);
+        } catch (SecurityException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static final Logger logger = Logger.getLogger(App.class.getName());
 
+    public static void logging(Level level, String msg) {
+        logger.log(level, msg);
+    }
 
 }
