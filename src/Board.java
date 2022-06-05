@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
 
 public class Board {
     Grid grid;
@@ -68,7 +69,8 @@ public class Board {
     }    
 
     public void keyPressed(KeyEvent e){
-        System.out.println("Key Pressed! " + e.getKeyCode());
+        //System.out.println("Key Pressed! " + e.getKeyCode());
+        App.logging(Level.INFO, "Key Pressed! " + e.getKeyCode()); // Log key presses
 
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             grid.keyPressedEnter();
@@ -92,7 +94,7 @@ public class Board {
         }
         if(e.getKeyCode()>= KeyEvent.VK_A && e.getKeyCode() <= KeyEvent.VK_Z){
             grid.keyPressedLetter(e.getKeyChar());
-            System.out.println("Character Key");
+            //System.out.println("Character Key");
         }
 
     }
